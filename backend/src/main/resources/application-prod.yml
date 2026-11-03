@@ -1,0 +1,30 @@
+# ====== 生产环境覆盖 ======
+# 启动: java -jar app.jar --spring.profiles.active=prod
+# 或   SPRING_PROFILES_ACTIVE=prod java -jar app.jar
+
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/community_group_buy}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:}
+  redis:
+    host: ${REDIS_HOST:localhost}
+    password: ${REDIS_PASSWORD:}
+  servlet:
+    context-path: /api
+
+# ====== 生产强制关闭敏感器 ======
+knife4j:
+  enable: false
+
+# ====== 生产日志降级 ======
+logging:
+  level:
+    com.project.groupbuy: INFO
+    com.project.groupbuy.mapper: WARN
+
+# ====== 生产 Tomcat 调优 ======
+server:
+  tomcat:
+    max-threads: 300
+    min-spare-threads: 50

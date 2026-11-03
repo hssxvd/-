@@ -1,0 +1,16 @@
+# ====== 开发环境覆盖 ======
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/community_group_buy?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+  redis:
+    host: localhost
+
+knife4j:
+  enable: true
+
+logging:
+  level:
+    com.project.groupbuy: DEBUG
+    com.project.groupbuy.mapper: DEBUG

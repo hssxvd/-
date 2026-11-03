@@ -1,0 +1,100 @@
+// ============================================================
+// 社区团购电商平台 · 全局设计系统 v2
+// ============================================================
+// 三端美学方向：
+//   消费者端  → Warm Market "街角鲜集"    暖杏橙 + 嫩绿 + 奶油白
+//   商家端   → Professional Commerce    科技蓝（保留 #409EFF）
+//   管理端   → Deep Console             深空灰（保留 #304156）
+//   核销员端 → Utility Cockpit          钢蓝 + 荧光警示色
+// ============================================================
+
+// ---------- 消费者端 Warm Market ----------
+$consumer-primary:       #FF8C42;   // 暖杏橙
+$consumer-primary-dark:  #E85D26;   // 深橙 按压态
+$consumer-primary-light: #FFB27A;   // 浅橙 悬停态
+$consumer-accent:        #52B788;   // 农场绿 新鲜/完成
+$consumer-cream:         #FFFDF7;   // 奶油白 卡片背景
+$consumer-bg:            #FAF6F1;   // 暖灰 页面底色（替代冷灰 #f5f5f5）
+$consumer-text:          #2D2A26;   // 暖深棕 主文字
+$consumer-text-soft:     #7A7470;   // 柔灰 次要文字
+
+// ---------- 核销员端 Utility Cockpit ----------
+$pickup-primary:         #1E3A5F;   // 钢蓝 主色
+$pickup-primary-light:   #2D5F8A;   // 浅钢蓝
+$pickup-warning:         #FF6B35;   // 荧光橙 待核销（视觉热点）
+$pickup-success:         #06D6A0;   // 薄荷绿 已核销
+$pickup-bg:              #F4F6F8;   // 冷灰 页面底色
+
+// ---------- 商家端（保留原 Token） ----------
+$merchant-primary:       #409EFF;
+
+// ---------- 管理端（保留原 Token） ----------
+$admin-primary:          #304156;
+
+// ---------- 统一状态色 ----------
+$status-pending-pay:     #909399;   // 待支付 灰
+$status-paid:            #409EFF;   // 已支付 蓝
+$status-fulfilling:      #FF8C42;   // 履约中 橙（用消费者主色替代原 #E6A23C）
+$status-completed:       #52B788;   // 完成 绿（用消费者 accent 替代原 #67C23A）
+$status-cancelled:       #909399;   // 取消 灰
+$status-aftersale:       #F56C6C;   // 售后 红
+
+// ---------- 统一圆角系统 ----------
+$radius-xs:  4px;   // 小标签
+$radius-sm:  8px;   // 按钮/卡片内小元素
+$radius-md:  12px;  // 常规卡片（消费端默认）
+$radius-lg:  16px;  // 大卡片/弹窗
+$radius-pill: 20px; // 胶囊标签
+
+// ---------- 阴影系统 ----------
+$shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+$shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+$shadow-lg: 0 8px 28px rgba(0, 0, 0, 0.12);
+
+// 消费者端品牌色投影（强调暖色调氛围）
+$shadow-consumer-card: 0 4px 20px rgba(255, 140, 66, 0.10);
+$shadow-consumer-float: 0 8px 32px rgba(255, 140, 66, 0.18);
+
+// ---------- 动效 ----------
+$ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); // 回弹
+$ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);      // 平滑
+$duration-fast: 120ms;
+$duration-base: 200ms;
+$duration-slow: 320ms;
+
+// ---------- 断点 ----------
+$bp-mobile: 480px;
+$bp-tablet: 768px;
+$bp-desktop: 1024px;
+
+// ---------- 通用工具类 ----------
+.amount-text {
+  font-family: 'Menlo', 'Consolas', 'Monaco', monospace;
+  font-weight: 600;
+  text-align: right;
+  letter-spacing: -0.5px;
+}
+
+.status-text { font-weight: 500; }
+
+// iPhone 安全区适配
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom, 0); }
+.safe-top    { padding-top: env(safe-area-inset-top, 0); }
+
+// 状态→颜色映射表（后端枚举值 → 颜色）
+$status-color-map: (
+  'PENDING_PAY': #909399,
+  'PAID': #409EFF,
+  'FULFILLING': #FF8C42,
+  'COMPLETED': #52B788,
+  'CANCELLED': #909399,
+  'APPLYING': #F56C6C,
+  'REFUNDED': #F56C6C,
+  'PENDING_ASSIGN': #909399,
+  'PENDING_PICKUP': #FF6B35,
+  'PICKED_UP': #06D6A0,
+  'PENDING': #909399,
+  'SUCCESS': #52B788,
+  'FAILED': #F56C6C
+);

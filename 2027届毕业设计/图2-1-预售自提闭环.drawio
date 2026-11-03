@@ -1,0 +1,86 @@
+﻿<mxfile host="app.diagrams.net" modified="2026-11-03T00:00:00.000Z" agent="Trae" version="24.0.0">
+  <diagram id="flow" name="图2-1 预售自提闭环流程图">
+    <mxGraphModel dx="1400" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="500" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Step 1 -->
+        <mxCell id="s1" value="商家创建预售活动
+设置窗口 cycle_start ~ cycle_end
++ 自提点 + SKU + 目标销量" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="30" y="150" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="s1n" value="①" style="text;html=1;align=center;verticalAlign=middle;fontSize=18;fontStyle=1;fontColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="115" y="120" width="30" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- arrow -->
+        <mxCell id="a1" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;endFill=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="s1" target="s2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Step 2 -->
+        <mxCell id="s2" value="窗口内预售下单
+consumer join → 写 group_buy_member
+只存 member 记录，不生成订单
+选自提点 pickup_point_id" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="290" y="150" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="s2n" value="②" style="text;html=1;align=center;verticalAlign=middle;fontSize=18;fontStyle=1;fontColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="375" y="120" width="30" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a2" value="cycle_end 到期" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;endFill=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="s2" target="s3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="560" y="190" as="sourcePoint" />
+            <mxPoint x="590" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Step 3 -->
+        <mxCell id="s3" value="窗口关闭 settleWindowEnd
+自动检查 member → 批量生成 orders
+activity.status → CLOSED
+无人下单 → CANCELLED" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="620" y="150" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="s3n" value="③" style="text;html=1;align=center;verticalAlign=middle;fontSize=18;fontStyle=1;fontColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="705" y="120" width="30" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a3" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;endFill=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="s3" target="s4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Step 4 -->
+        <mxCell id="s4" value="商家一键配货 POST /{id}/ready
+fulfillment_status → PENDING_PICKUP
+消费者收到待取货推送" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="890" y="150" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="s4n" value="④" style="text;html=1;align=center;verticalAlign=middle;fontSize=18;fontStyle=1;fontColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="975" y="120" width="30" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a4" value="凭取货码扫码" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;endFill=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="s4" target="s5">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1140" y="190" as="sourcePoint" />
+            <mxPoint x="1170" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Step 5 -->
+        <mxCell id="s5" value="自提点核销员扫码
+fulfillment_status → COMPLETED
+activity.status → COMPLETED" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="150" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="s5n" value="⑤" style="text;html=1;align=center;verticalAlign=middle;fontSize=18;fontStyle=1;fontColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="1245" y="120" width="30" height="30" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

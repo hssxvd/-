@@ -1,0 +1,44 @@
+# ===== Java / Maven =====
+backend/target/
+backend/*.iml
+backend/.idea/
+backend/logs/
+backend/uploads/
+backend/*.log
+backend/backup_before_transaction_fix/
+
+# ===== Node.js / Vue / Vite =====
+frontend/node_modules/
+frontend/dist/
+frontend/*.iml
+frontend/.vite/
+frontend/vite.config.js.timestamp-*.mjs
+
+# ===== IDE =====
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.settings/
+.project
+.classpath
+
+# ===== 日志 & 临时文件 =====
+*.log
+*.tmp
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
+
+# ===== Word 锁文件 =====
+~$*.doc
+~$*.docx
+
+# ===== 毕设截图（大文件二进制） =====
+2027届毕业设计/报告截图/*.png
+
+# ===== 系统垃圾 =====
+logs/
+scripts/

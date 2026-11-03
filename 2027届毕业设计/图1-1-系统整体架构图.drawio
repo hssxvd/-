@@ -1,0 +1,90 @@
+﻿<mxfile host="app.diagrams.net" modified="2026-11-03T00:00:00.000Z" agent="Trae" version="24.0.0">
+  <diagram id="arch" name="图1-1 系统整体架构图">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- 浏览器客户端层 -->
+        <mxCell id="2" value="浏览器客户端（Chrome 120+）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="400" y="30" width="360" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="3" value="Vue 3 SPA + Element Plus UI + Vite" style="shape=cube;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="450" y="40" width="260" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- HTTP 箭头 -->
+        <mxCell id="4" value="HTTP /api/*" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;" edge="1" parent="1" source="2" target="5">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="580" y="120" as="sourcePoint" />
+            <mxPoint x="580" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Nginx 层 -->
+        <mxCell id="5" value="Nginx 80 端口" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="440" y="140" width="280" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="6" value="静态资源 + 反向代理 /api → 8080" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=0;align=1;" vertex="1" parent="5">
+          <mxGeometry x="0" y="30" width="280" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="7" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;endFill=1;" edge="1" parent="1" source="5" target="10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Spring Boot 层 -->
+        <mxCell id="8" value="Spring Boot 2.7.18" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="400" y="210" width="360" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="9" value="MyBatis-Plus 3.5.5 + jjwt 0.11.5 + Druid + Knife4j" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;" vertex="1" parent="8">
+          <mxGeometry x="0" y="35" width="360" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="10" value="业务层 modules（10 个）" style="shape=cube;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="420" y="290" width="320" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="11" value="auth / user / merchant / product / groupbuy / order / pickup / forecast" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" vertex="1" parent="10">
+          <mxGeometry x="0" y="20" width="320" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- 数据库层 -->
+        <mxCell id="12" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;endFill=1;" edge="1" parent="1" source="10" target="13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="13" value="MySQL 8.0" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="280" y="370" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="14" value="39 张业务表" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;" vertex="1" parent="13">
+          <mxGeometry x="0" y="35" width="180" height="25" as="geometry" />
+        </mxCell>
+
+        <mxCell id="15" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;endFill=1;" edge="1" parent="1" source="10" target="16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="16" value="Redis 6" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="620" y="370" width="140" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="17" value="热点缓存" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;" vertex="1" parent="16">
+          <mxGeometry x="0" y="35" width="140" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- 横向辅助标注 -->
+        <mxCell id="18" value="前端" style="text;html=1;align=1;fontSize=14;fontStyle=1;fontColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="200" y="55" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="19" value="网关" style="text;html=1;align=1;fontSize=14;fontStyle=1;fontColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="200" y="155" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="20" value="后端" style="text;html=1;align=1;fontSize=14;fontStyle=1;fontColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="200" y="260" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="21" value="数据层" style="text;html=1;align=1;fontSize=14;fontStyle=1;fontColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="200" y="405" width="80" height="30" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

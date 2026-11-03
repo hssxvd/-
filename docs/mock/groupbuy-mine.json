@@ -1,0 +1,19 @@
+{
+    "code":  0,
+    "message":  "success",
+    "data":  [
+                 {
+                     "id":  1,
+                     "activityId":  1,
+                     "userId":  1,
+                     "orderId":  null,
+                     "quantity":  5,
+                     "groupPrice":  5.78,
+                     "isLeader":  1,
+                     "joinTime":  "2026-10-24T09:52:31",
+                     "payStatus":  "UNPAID",
+                     "createTime":  "2026-10-24T09:52:31"
+                 }
+             ],
+    "traceId":  null
+}

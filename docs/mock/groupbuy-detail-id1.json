@@ -1,0 +1,39 @@
+{
+    "code":  0,
+    "message":  "success",
+    "data":  {
+                 "activity":  {
+                                  "id":  1,
+                                  "activityNo":  "GB-SEED-1",
+                                  "title":  "å´æææºéè 5æ¤å¢",
+                                  "productId":  1,
+                                  "skuId":  1,
+                                  "merchantId":  3,
+                                  "communityId":  1,
+                                  "minGroupQty":  10,
+                                  "maxGroupQty":  30,
+                                  "groupPrice":  5.78,
+                                  "originalPrice":  6.80,
+                                  "discountPercent":  null,
+                                  "cycleStart":  "2026-10-24T09:51:57",
+                                  "cycleEnd":  "2026-10-27T09:51:57",
+                                  "expectedArrive":  "2026-10-28T09:51:57",
+                                  "pickupPointId":  null,
+                                  "status":  "OPEN",
+                                  "autoCutoff":  1,
+                                  "createBy":  null,
+                                  "createTime":  "2026-10-24T09:51:56",
+                                  "updateTime":  "2026-10-24T09:51:56",
+                                  "isDeleted":  0
+                              },
+                 "progress":  {
+                                  "activityId":  1,
+                                  "joinedQty":  2,
+                                  "joinedCount":  1,
+                                  "progressPct":  20,
+                                  "isFormed":  0,
+                                  "updateTime":  "2026-10-24T09:52:31"
+                              }
+             },
+    "traceId":  null
+}
