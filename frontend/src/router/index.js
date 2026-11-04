@@ -88,7 +88,9 @@ const routes = [
       { path: 'products', name: 'AdminProducts', component: () => import('@/views/admin/Products.vue'), meta: { title: '商品审核' } },
       { path: 'orders', name: 'AdminOrders', component: () => import('@/views/admin/Orders.vue'), meta: { title: '全局订单' } },
       { path: 'aftersale', name: 'AdminAftersale', component: () => import('@/views/admin/Aftersale.vue'), meta: { title: '售后监控' } },
-      { path: 'logs', name: 'AdminLogs', component: () => import('@/views/admin/Logs.vue'), meta: { title: '操作日志' } }
+      { path: 'logs', name: 'AdminLogs', component: () => import('@/views/admin/Logs.vue'), meta: { title: '操作日志' } },
+      { path: 'communities', name: 'AdminCommunities', component: () => import('@/views/admin/Communities.vue'), meta: { title: '社区管理' } },
+      { path: 'pickup-points', name: 'AdminPickupPoints', component: () => import('@/views/admin/PickupPoints.vue'), meta: { title: '自提点管理' } }
     ]
   },
 

@@ -54,6 +54,14 @@
             <el-icon><Document /></el-icon>
             <span>操作日志</span>
           </el-menu-item>
+          <el-sub-menu index="base">
+            <template #title>
+              <el-icon><OfficeBuilding /></el-icon>
+              <span>基础数据</span>
+            </template>
+            <el-menu-item index="/admin/communities">社区管理</el-menu-item>
+            <el-menu-item index="/admin/pickup-points">自提点管理</el-menu-item>
+          </el-sub-menu>
         </el-menu>
       </el-scrollbar>
 

@@ -79,18 +79,14 @@ public class GroupBuyAdminController {
         Integer cycleDays = body.containsKey("cycleDays") ? (Integer) body.get("cycleDays") : 3;
         Long communityId = body.get("communityId") != null ? Long.valueOf(body.get("communityId").toString()) : null;
 
-        // 未指定社区时，从商家绑定的社区取
-        if (communityId == null) {
-            Merchant m = merchantMapper.selectById(merchantId);
-            if (m != null && m.getCommunityId() != null) {
-                communityId = m.getCommunityId();
-            } else {
-                communityId = 1L; // 兜底
-            }
-        }
-
         // 1. 校验商品 + SKU 归属当前商家
         Product product = productMapper.selectById(productId);
+        if (product == null) throw new BusinessException(ErrorCode.DATA_NOT_FOUND, "商品不存在");
+        if (!product.getMerchantId().equals(merchantId))
+            throw new BusinessException(ErrorCode.PARAM_ERROR, "无权操作非本店商品");
+
+        // ✅ 强制从商品继承社区（库存是按 product 的 community 存的）
+        communityId = product.getCommunityId();
         if (product == null) throw new BusinessException(ErrorCode.DATA_NOT_FOUND, "商品不存在");
         if (!product.getMerchantId().equals(merchantId))
             throw new BusinessException(ErrorCode.PARAM_ERROR, "无权操作非本店商品");

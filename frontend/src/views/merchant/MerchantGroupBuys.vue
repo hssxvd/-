@@ -144,7 +144,7 @@
             <el-option
               v-for="p in myProducts"
               :key="p.id"
-              :label="`${p.productName} (SKU: ${p.id})`"
+              :label="`${p.name || p.productName} (SKU: ${p.id})`"
               :value="p.id"
             />
           </el-select>
@@ -235,6 +235,8 @@ import { ref, computed, onMounted } from 'vue'
 import { Plus } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import request from '@/utils/request'
+import { useUserStore } from '@/store/user'
+import { storage } from '@/utils/storage'
 
 const loading = ref(false)
 const activities = ref([])
@@ -291,7 +293,7 @@ async function loadList() {
   loading.value = true
   try {
     const res = await request.get('/merchant/group-buys')
-    activities.value = res.data || res || []
+    activities.value = res || []
   } catch (e) {
     ElMessage.error('加载失败')
   } finally {
@@ -303,7 +305,7 @@ async function loadMyProducts() {
   try {
     // 商家可以拉到自己的商品（用 /products?merchantId=currentMerchant 方式或直接从 ProductsService）
     const res = await request.get('/products', { params: { page: 1, size: 1000 } })
-    const all = res.data?.records || res.data || []
+    const all = Array.isArray(res) ? res : (res?.records || [])
     // 前端没法直接知道 merchantId，用用户 store 里的
     const mid = getCurrentMerchantId()
     myProducts.value = all.filter(p => String(p.merchantId) === String(mid))
@@ -316,24 +318,24 @@ async function loadMyProducts() {
   }
   try {
     const skuRes = await request.get('/product-skus', { params: { page: 1, size: 2000 } })
-    allSkus.value = skuRes.data?.records || skuRes.data || []
+    allSkus.value = Array.isArray(skuRes) ? skuRes : (skuRes?.records || [])
     if (!allSkus.value.length) {
       // 降级：没有 SKU 接口就从商品里拉
       for (const p of myProducts.value) {
-        allSkus.value.push({ id: p.id * 100 + 1, productId: p.id, skuName: p.productName, price: p.price || 0 })
+        allSkus.value.push({ id: p.id * 100 + 1, productId: p.id, skuName: p.name || p.productName, price: p.price || 0 })
       }
     }
   } catch {
     for (const p of myProducts.value) {
-      allSkus.value.push({ id: p.id * 100 + 1, productId: p.id, skuName: p.productName, price: p.price || 0 })
+      allSkus.value.push({ id: p.id * 100 + 1, productId: p.id, skuName: p.name || p.productName, price: p.price || 0 })
     }
   }
 }
 
 function getCurrentMerchantId() {
   try {
-    const store = JSON.parse(localStorage.getItem('user') || '{}')
-    return store.userId || store.id || store.merchantId || 3 // 兜底 merchantId=3
+    const store = useUserStore()
+    return store.merchantId || storage.get('merchantId') || 3
   } catch { return 3 }
 }
 
@@ -363,7 +365,7 @@ function onProductChange(pid) {
   }
   if (!createForm.value.title) {
     const p = myProducts.value.find(x => x.id === pid)
-    if (p) createForm.value.title = p.productName + ' 团购'
+    if (p) createForm.value.title = (p.name || p.productName) + ' 团购'
   }
 }
 
@@ -401,7 +403,7 @@ async function viewMembers(row) {
   membersLoading.value = true
   try {
     const res = await request.get(`/merchant/group-buys/${row.id}/members`)
-    membersList.value = res.data || res || []
+    membersList.value = res || []
   } catch (e) {
     ElMessage.error('加载失败')
   } finally {
@@ -437,7 +439,7 @@ async function markReady(row) {
     )
     await request.post(`/merchant/group-buys/${row.id}/ready`)
     ElMessage.success('配货完成，已通知用户取货')
-    await load()
+    await loadList()
   } catch (e) {
     if (e !== 'cancel') ElMessage.error(e?.message || '操作失败')
   }
